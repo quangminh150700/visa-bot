@@ -1,4 +1,4 @@
-/name: 🛂 Visa Slot Checker
+name: 🛂 Visa Slot Checker
 
 on:
   schedule:
