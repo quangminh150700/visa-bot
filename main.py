@@ -105,7 +105,8 @@ async def main() -> None:
         token=config["telegram_token"],
         chat_id=config["telegram_chat_id"],
     )
-
+await notifier.send_test()
+logger.info("✅ Xong. GitHub Actions sẽ chạy lại sau 30 phút.")
     now_vn = datetime.now(VN_TZ).strftime("%d/%m/%Y %H:%M")
     logger.info(f"[{now_vn} VN] Kiểm tra {len(countries)} nước: {', '.join(countries).upper()}")
 
