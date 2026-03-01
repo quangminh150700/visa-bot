@@ -2,8 +2,8 @@ name: 📱 Telegram Commands
 
 on:
   schedule:
-    - cron: '*/5 * * * *'   # Chạy mỗi 5 phút
-  workflow_dispatch:         # Cho phép chạy thủ công
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 jobs:
   handle-commands:
