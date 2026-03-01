@@ -1,0 +1,37 @@
+name: 📱 Telegram Commands
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'   # Chạy mỗi 5 phút
+  workflow_dispatch:         # Cho phép chạy thủ công
+
+jobs:
+  handle-commands:
+    name: Xử lý lệnh Telegram
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Cài Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Cài dependencies
+        run: pip install -r requirements.txt
+
+      - name: 📱 Xử lý lệnh Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+          VFS_USERNAME:       ${{ secrets.VFS_USERNAME }}
+          VFS_PASSWORD:       ${{ secrets.VFS_PASSWORD }}
+          ORIGIN_COUNTRY:     ${{ vars.ORIGIN_COUNTRY }}
+          TARGET_COUNTRIES:   ${{ vars.TARGET_COUNTRIES }}
+          VISA_CATEGORY:      ${{ vars.VISA_CATEGORY }}
+          VISA_SUBCATEGORY:   ${{ vars.VISA_SUBCATEGORY }}
+        run: python telegram_handler.py
